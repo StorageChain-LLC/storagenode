@@ -1,3 +1,8 @@
+variable "number_of_vms"{
+    type = strig
+    default = "2"
+}
+
 variable "admin_username" {
     type = string
     default = "vagrant"
