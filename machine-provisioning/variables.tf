@@ -1,14 +1,13 @@
-variable "number_of_vms"{
-    type = strig
+variable "number_of_vms" {
+    type = string
     default = "2"
 }
-
-variable "admin_username" {
+variable "host_admin_username" {
     type = string
     default = "vagrant"
 }
 
-variable "admin_password" {
+variable "host_admin_password" {
     type = string
     default = "vagrant"
 }
@@ -26,4 +25,19 @@ variable "cpu" {
 variable "memory" {
     type = string
     default = "3 gb"
+}
+
+variable "minio_admin_user" {
+    type = string
+    default = "minioadmin"
+}
+
+variable "minio_admin_pass" {
+    type = string
+    default = "minioadmin"
+}
+
+variable "host_interface" {
+    type = string
+    default = "en0"
 }
