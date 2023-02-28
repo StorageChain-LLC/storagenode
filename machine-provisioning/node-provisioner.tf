@@ -32,16 +32,14 @@ resource "virtualbox_vm" "node" {
   }
   
   provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/scripts/node_runner.sh",
+    scripts = [
       "/tmp/scripts/node_runner.sh",
-      "chmod +x /tmp/scripts/minio-installation-and-configuration.sh",
       "/tmp/scripts/minio-installation-and-configuration.sh ${var.host_admin_password} ${var.host_admin_username} ${var.minio_admin_user} ${var.minio_admin_pass}",
     ]
   }
 
   network_adapter {
-    type = "${var.vm_network}"
+    type = "${var.vm_network_type}"
     host_interface = "${var.host_interface}"
   }
 }

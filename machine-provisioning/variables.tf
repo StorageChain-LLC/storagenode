@@ -12,7 +12,7 @@ variable "host_admin_password" {
     default = "vagrant"
 }
 
-variable "vm_network" {
+variable "vm_network_type" {
     type = string
     default = "bridged"
 }

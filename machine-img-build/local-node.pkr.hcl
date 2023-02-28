@@ -17,6 +17,11 @@ variable "name" {
     default = "chain-node"
 }
 
+variable "user_to_login_with" {
+    type = string
+    default = "vagrant"
+}
+
 source "vagrant" "localhost-node" {
   communicator = "ssh"
   source_path  = "generic/ubuntu2204"
@@ -32,6 +37,7 @@ build {
     sources = ["source.vagrant.localhost-node"]
 
     provisioner "shell" {
+        environment_vars = ["LOGGEDINUSER=${var.user_to_login_with}"]
         scripts = [
             "scripts/node_env_setup.sh",
         ]
