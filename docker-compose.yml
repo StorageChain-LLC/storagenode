@@ -1,5 +1,4 @@
 version: '2'
-
 services:
    ipfs-node:
      image: ipfs/go-ipfs
