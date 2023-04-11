@@ -1,7 +1,17 @@
 # How to start
-Put your ipfs swarm.key on the root directory and run the following commands
+## PORTS to forward
+ - 4001
+ - 5001
+ - 8080
+ - 9094
+ - 9095
+ - 9096
 
-`mkdir ipfs-node cluster`
-`tee ipfs-node/swarm.key <  swarm.key`
-`docker-compose up -d ipfs-node --remove-orphans`
-`docker-compose up -d cluster --remove-orphans`
+## Create a .env file in the folder you wish to keep the storage items
+see .env.example and set the variables
+ ## Install Docker
+ https://docs.docker.com/engine/install/
+
+## Run the following command from docker
+`docker-compose  --env-file ./.env up -d`
+
