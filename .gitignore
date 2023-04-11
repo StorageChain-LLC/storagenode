@@ -5,3 +5,5 @@ ipfs*
 cluster*
 docker-compose-backup.yml
 .vscode
+.env
+storage/

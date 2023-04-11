@@ -1,25 +1,40 @@
-version: '2'
+version: '1.4'
 services:
-   ipfs-node:
-     image: ipfs/go-ipfs
-     container_name: "ipfs-node-private"
-     ports:
-       - 4001:4001
-       - 5001:5001
-     volumes:
-       - ./ipfs-node:/data/ipfs/
+   node:
+    image: ipfs/go-ipfs:latest
+    container_name: "storagechain"
+    environment:
+      - IBP2P_FORCE_PNET=1
+      - IPFS_LOGGING=debug
+      - MONITORPINGINTERVAL="5s"
+    ports:
+      # - 80:80
+      - 4001:4001
+      - 5001:5001
+      - 8080:8080
+      # - 443:443 #optional
+    volumes:
+      - ./storage/ipfs:/data/ipfs/
+      - ./script.sh:/script.sh
+    entrypoint: sh -c "/script.sh"
+    # restart: unless-stopped
    cluster:
      image: ipfs/ipfs-cluster:latest
-     container_name: "ipfs-cluster-private"
      environment:
-       CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs-node/tcp/5001
-       CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
-       IPFS_BOOTSTRAP_RM_ALL: "true"
+       CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/node/tcp/5001
+      #  CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ipv4/0.0.0.0/tcp/9094 # Expose API
+       CLUSTER_MONITORPINGINTERVAL: "5s"
+       CLUSTER_PEERNAME: $CLUSTER_NAME
+       CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
+
      ports:
        - 9094:9094
        - 9095:9095
        - 9096:9096
      depends_on:
-       - ipfs-node
+       - node
      volumes:
-       - ./cluster:/data/ipfs-cluster
+       - ./storage/cluster:/data/ipfs-cluster
+       - ./follower.sh:/follower.sh
+     entrypoint: sh -c "/follower.sh"
+
