@@ -6,4 +6,5 @@ cluster*
 docker-compose-backup.yml
 .vscode
 .env
-storage/
+/storage
+/.DS_Store

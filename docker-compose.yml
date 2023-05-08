@@ -6,7 +6,7 @@ services:
     environment:
       - IBP2P_FORCE_PNET=1
       - IPFS_LOGGING=debug
-      - MONITORPINGINTERVAL="5s"
+      - MONITORINGINTERVAL="5s"
     ports:
       # - 80:80
       - 4001:4001
@@ -24,7 +24,7 @@ services:
      environment:
        CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/node/tcp/5001
        CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
-       CLUSTER_MONITORPINGINTERVAL: "5s"
+       CLUSTER_MONITORINGINTERVAL: "5s"
        CLUSTER_PEERNAME: $CLUSTER_NAME
        CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
 
