@@ -8,3 +8,4 @@ docker-compose-backup.yml
 .env
 /storage
 /.DS_Store
+/*build

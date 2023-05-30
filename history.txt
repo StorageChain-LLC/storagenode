@@ -1,0 +1,12 @@
+Change Log for Follower Node:
+- QmNj7guXKAo67nZwE6XtyfhgDnXsdpa8Xte3MVH7TjaUoM
+- QmTUxPJSSmkFzVHZj9GvWzaKSmAZ5i3Eye5sWY77vqMkJv
+- QmVb5FRKmvCmfyCVpggfxSjRgBjsVAC6b3FSVrqSXQS594
+- QmYNsSodjwvLoSARMqhtxrQE8gGXA9bnS6JUNoVe2xptxz
+- QmXJzQJNAQmfoj3VpPZkvVbD6aeUniQquuUbTsBNbtUf76
+- QmfXMeZwuyBFvCsFwJZNfPnnkZdiiskwoPCGfyS1PWwGeG
+- QmPNTP22q7qHpCHfWhh6xZ87bysi345cUcuC9bMvhYFbvq
+- QmSUMPuKFxGiVAAZoucwenJ6W2jcDtAep6JLpqDxTzto3Z
+- QmUPBLCYKSm4RJjyLaEgRCgxrb654AYm3PUx8W6TM3SCPv
+- QmSUMPuKFxGiVAAZoucwenJ6W2jcDtAep6JLpqDxTzto3Z
+- QmR6tsjp1HgpbyipPH3MQfhgjq6d2LFqi3Vgj9W2NWQqsW
