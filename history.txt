@@ -10,3 +10,5 @@ Change Log for Follower Node:
 - QmUPBLCYKSm4RJjyLaEgRCgxrb654AYm3PUx8W6TM3SCPv
 - QmSUMPuKFxGiVAAZoucwenJ6W2jcDtAep6JLpqDxTzto3Z
 - QmR6tsjp1HgpbyipPH3MQfhgjq6d2LFqi3Vgj9W2NWQqsW
+- QmXLtaQ65wsS1p3WysKqA8b2MyuxrnKhgU4nkSfRSSXF1D
+- QmRNJD4dXVfaqSfskY8LT2mdxbELiHVAkqPuWdz9WgQfxS
