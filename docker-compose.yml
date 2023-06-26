@@ -38,4 +38,11 @@ services:
      volumes:
        - ./storage/cluster:/data/ipfs-cluster
        - ./follower.sh:/follower.sh
+   file-server:
+    container_name: "storagechain-server"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+     - 3008:3008
 
