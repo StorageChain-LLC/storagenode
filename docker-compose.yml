@@ -28,7 +28,11 @@ services:
        CLUSTER_MONITORINGINTERVAL: "5s"
        CLUSTER_PEERNAME: $CLUSTER_NAME
        CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
-       KAFKA_ADVERTISED_HOST_NAME: cluster-internal.io
+       CLUSTER_HOST_NAME: cluster-internal.io
+       CLUSTER_EMAIL: $EMAIL
+       CLUSTER_PASSWORD: $PASSWORD
+       CLUSTER_NODE_ID: $NODE_ID
+       
 
      ports:
        - 9094:9094
@@ -41,10 +45,9 @@ services:
        - ./storage/cluster:/data/ipfs-cluster
        - ./follower.sh:/follower.sh
    file-server:
-    container_name: "storagechain-server"
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: sherazahmdd/cluster-file-server:main
+    environment:
+       ENV: "production"
+       PORT: 3008
     ports:
      - 3008:3008
-
