@@ -8,7 +8,7 @@ import * as os from 'os';
 import { first, firstValueFrom, map } from 'rxjs';
 
 // Uncomment this only for LocalHost
-// process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 @Injectable()
 export class FileService {
@@ -55,12 +55,17 @@ export class FileService {
   }
 
   async getClusterId() {
+    const env = process.env.ENV || 'development';
     try {
       const ipfsClusterResponse = await firstValueFrom(
         this.httpService
           //TODO: Replace this cluster URL with http://localhost:port
           // .get('https://46.101.133.110:9094/id')
-          .get('http://localhost:9094/id')
+          .get(
+            env === 'development'
+              ? 'http://localhost:9094/id'
+              : 'http://cluster-internal.io:9094/id',
+          )
           .pipe(map((response) => response?.data)),
       );
       return ipfsClusterResponse;

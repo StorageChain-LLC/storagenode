@@ -100,6 +100,13 @@ export class FileController {
     this.fileService.saveNodeOsDetails();
   }
 
+  @Get('node/status')
+  async getStatus(@Res() res: Response, @Param() _params, @Req() _req) {
+    const cluster = await this.fileService.getClusterId();
+    const clusterId = cluster?.addresses[cluster.addresses.length - 1] || null;
+    return res.send({ isClusterOnline: !!clusterId });
+  }
+
   @Get('view/access-play/:accessKey/:token?')
   async playVideo(@Res() res: Response, @Param() params, @Req() req) {
     try {
@@ -499,7 +506,7 @@ export class FileController {
       }
       readableStream.push(null);
     } catch (error) {
-      console.log('error ===', error);
+      console.error('error ===', error);
       return res.status(HttpStatus.NOT_FOUND).send();
     }
   }

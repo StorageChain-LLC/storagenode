@@ -1,7 +1,7 @@
 version: '3'
 services:
    node:
-    image: ipfs/go-ipfs:latest
+    image: ipfs/go-ipfs
     container_name: "storagechain"
     environment:
       - IBP2P_FORCE_PNET=1
@@ -20,7 +20,7 @@ services:
     entrypoint: sh -c "/script.sh"
     # restart: unless-stopped
    cluster:
-     image: ipfs/ipfs-cluster:latest
+     image: sherazahmdd/storagechain-cluster:main
      entrypoint: sh -c "/follower.sh"
      environment:
        CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/node/tcp/5001
@@ -28,11 +28,13 @@ services:
        CLUSTER_MONITORINGINTERVAL: "5s"
        CLUSTER_PEERNAME: $CLUSTER_NAME
        CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
+       KAFKA_ADVERTISED_HOST_NAME: cluster-internal.io
 
      ports:
        - 9094:9094
        - 9095:9095
        - 9096:9096
+     hostname: 'cluster-internal.io'
      depends_on:
        - node
      volumes:
@@ -43,6 +45,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports: 
+    ports:
      - 3008:3008
 
