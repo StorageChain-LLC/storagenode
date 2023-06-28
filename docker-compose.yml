@@ -1,7 +1,7 @@
 version: '3'
 services:
    node:
-    image: ipfs/go-ipfs:latest
+    image: ipfs/go-ipfs
     container_name: "storagechain"
     environment:
       - IBP2P_FORCE_PNET=1
@@ -20,7 +20,7 @@ services:
     entrypoint: sh -c "/script.sh"
     # restart: unless-stopped
    cluster:
-     image: ipfs/ipfs-cluster:latest
+     image: sherazahmdd/storagechain-cluster:main
      entrypoint: sh -c "/follower.sh"
      environment:
        CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/node/tcp/5001
