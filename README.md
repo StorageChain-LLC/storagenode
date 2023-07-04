@@ -6,6 +6,7 @@
  - 9094
  - 9095
  - 9096
+ - 3008
 
 ## Create a .env file in the folder you wish to keep the storage items
 see .env.example and set the variables
