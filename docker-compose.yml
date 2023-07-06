@@ -20,7 +20,7 @@ services:
     entrypoint: sh -c "/script.sh"
     # restart: unless-stopped
    cluster:
-     image: sherazahmdd/storagechain-cluster:main
+     image: storagechain/cluster:latest
      entrypoint: sh -c "/follower.sh"
      environment:
        CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/node/tcp/5001
@@ -32,22 +32,21 @@ services:
        CLUSTER_EMAIL: $EMAIL
        CLUSTER_PASSWORD: $PASSWORD
        CLUSTER_NODE_ID: $NODE_ID
-       
 
      ports:
        - 9094:9094
        - 9095:9095
        - 9096:9096
-     hostname: 'cluster-internal.io'
      depends_on:
        - node
      volumes:
        - ./storage/cluster:/data/ipfs-cluster
        - ./follower.sh:/follower.sh
    file-server:
-    image: sherazahmdd/cluster-file-server:main
+    image: storagechain/cluster-file-server:latest
     environment:
-       ENV: "production"
-       PORT: 3008
-    ports:
+      ENV: "production"
+      PORT: 3008
+    ports: 
      - 3008:3008
+
