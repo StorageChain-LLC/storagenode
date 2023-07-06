@@ -20,6 +20,7 @@ services:
     entrypoint: sh -c "/script.sh"
     # restart: unless-stopped
    cluster:
+   # TODO: Update the cluster image to fetch from storagechain cluster dockerhub 
      image: sherazahmdd/storagechain-cluster:main
      entrypoint: sh -c "/follower.sh"
      environment:
@@ -45,6 +46,7 @@ services:
        - ./storage/cluster:/data/ipfs-cluster
        - ./follower.sh:/follower.sh
    file-server:
+   # TODO: Update the file-server to use Storagechain dockerhub
     image: sherazahmdd/cluster-file-server:main
     environment:
        ENV: "production"
