@@ -1,5 +1,7 @@
 version: '3'
+
 services:
+
    node:
     image: ipfs/go-ipfs
     container_name: "storagechain"
@@ -8,20 +10,21 @@ services:
       - IPFS_LOGGING=debug
       - MONITORINGINTERVAL="5s"
     ports:
-      # - 80:80
       - 4001:4001
       - 5001:5001
       - 8080:8080
-      # - 443:443 #optional
     volumes:
       - ./swarm.key:/data/ipfs/swarm.key
       - ./storage/ipfs:/data/ipfs/
       - ./script.sh:/script.sh
     entrypoint: sh -c "/script.sh"
-    # restart: unless-stopped
+    restart: unless-stopped
+
    cluster:
      image: storagechain/cluster:latest
      entrypoint: sh -c "/follower.sh"
+     platform: linux/amd64
+     restart: unless-stopped
      environment:
        CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/node/tcp/5001
        CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
@@ -32,7 +35,6 @@ services:
        CLUSTER_EMAIL: $EMAIL
        CLUSTER_PASSWORD: $PASSWORD
        CLUSTER_NODE_ID: $NODE_ID
-
      ports:
        - 9094:9094
        - 9095:9095
@@ -42,11 +44,14 @@ services:
      volumes:
        - ./storage/cluster:/data/ipfs-cluster
        - ./follower.sh:/follower.sh
+
    file-server:
     image: storagechain/cluster-file-server:latest
     environment:
       ENV: "production"
       PORT: 3008
-    ports: 
+    ports:
      - 3008:3008
+    platform: linux/amd64
+    restart: unless-stopped
 
