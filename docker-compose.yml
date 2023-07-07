@@ -23,6 +23,7 @@ services:
    cluster:
      image: storagechain/cluster:latest
      entrypoint: sh -c "/follower.sh"
+     hostname: 'cluster-internal.io'
      platform: linux/amd64
      restart: unless-stopped
      environment:
