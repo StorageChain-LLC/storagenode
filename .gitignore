@@ -8,3 +8,4 @@ docker-compose-backup.yml
 /storage
 /.DS_Store
 /*build
+follower-cluster.json
