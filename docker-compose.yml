@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
 
    cluster:
-     image: storagechain/cluster:latest
+     image: zainhaidervii/ipfs:latest
      entrypoint: sh -c "/follower.sh"
      hostname: 'cluster-internal.io'
      platform: linux/amd64
@@ -51,6 +51,7 @@ services:
     environment:
       ENV: "production"
       PORT: 3008
+      API_SERVER_URL: "https://storagechain-be.invo.zone/api"
     ports:
      - 3008:3008
     platform: linux/amd64
