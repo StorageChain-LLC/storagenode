@@ -1,21 +1,15 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-
-import * as fs from 'fs';
 
 import * as os from 'os';
-import { first, firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 
 // Uncomment this only for LocalHost
 // process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 @Injectable()
 export class FileService {
-  constructor(
-    private readonly httpService: HttpService,
-    private readonly jwtService: JwtService,
-  ) {}
+  constructor(private readonly httpService: HttpService) {}
 
   getHello(): string {
     return 'Hello World!';
@@ -48,7 +42,7 @@ export class FileService {
     } catch (err) {
       console.error(
         'file: file.service.ts:37 ~ AppService ~ getIpfsId ~ err:',
-        err,
+        err?.message,
       );
       return null;
     }
@@ -59,7 +53,7 @@ export class FileService {
       const ipfsClusterResponse = await firstValueFrom(
         this.httpService
           //TODO: Replace this cluster URL with http://localhost:port
-          // .get('https://46.101.133.110:9094/id')
+          // .get('http://46.101.133.110:9094/id')
           .get('http://localhost:9094/id')
           .pipe(map((response) => response?.data)),
       );
@@ -67,9 +61,39 @@ export class FileService {
     } catch (err) {
       console.error(
         'file: file.service.ts:56 ~ AppService ~ getClusterId ~ err:',
-        err,
+        err?.message,
       );
       return null;
+    }
+  }
+
+  async updateNodeDetailsOnRecursiveCall(
+    ipAddress: string,
+    ipfsClusterId: string,
+    ipfsId: string,
+  ) {
+    try {
+      const updateNodeDetails = await firstValueFrom(
+        this.httpService
+          .post(`${process.env.API_SERVER_URL}/node/update-node-details`, {
+            ipAddress,
+            ipfsClusterId,
+            ipfsId,
+          })
+          .pipe(map((response) => response?.data)),
+      );
+
+      console.log(
+        'file: file.service.ts:111 ~ FileService ~ saveNodeOsDetails ~ addNodeResponse:',
+        updateNodeDetails,
+      );
+    } catch (err) {
+      console.error(
+        'file: file.service.ts:97 ~ FileService ~ err:',
+        err?.response?.data?.message || err?.message,
+      );
+
+      setTimeout(async () => await this.saveNodeOsDetails(), 5000);
     }
   }
 
@@ -81,6 +105,23 @@ export class FileService {
         'file: file.service.ts:76 ~ FileService ~ saveNodeOsDetails ~ ipAddresses:',
         ipAddresses,
       );
+
+      // Check node details already updated or not
+      const nodeDetailsResponse = await firstValueFrom(
+        this.httpService
+          .get(
+            `${process.env.API_SERVER_URL}/node/node-details/${ipAddresses[0]}`,
+          )
+          .pipe(map((response) => response?.data)),
+      );
+
+      if (nodeDetailsResponse?.data?.ipfsClusterId) {
+        return {
+          success: true,
+          message: 'Node details are already updated',
+        };
+      }
+
       // IPFS ID
       const ipfsId = await this.getIpfsId();
       console.log(
@@ -95,46 +136,19 @@ export class FileService {
         ipfsClusterId?.id,
       );
 
-      // System name
-      const systemName = os.hostname();
-      console.log(
-        'file: file.service.ts:95 ~ FileService ~ saveNodeOsDetails ~ systemName:',
-        systemName,
+      await this.updateNodeDetailsOnRecursiveCall(
+        ipAddresses[0],
+        ipfsClusterId?.id,
+        ipfsId?.ID,
       );
-
-      const addNodeResponse = await firstValueFrom(
-        this.httpService
-          .post(`${process.env.API_SERVER_URL}/node/os-info`, {
-            ipAddress: ipAddresses[0],
-            name: systemName,
-            ipfsClusterId: ipfsClusterId?.id,
-            ipfsId: ipfsId?.ID,
-            totalStorage: parseInt(process.env.TOTAL_STORAGE),
-          })
-          .pipe(map((response) => response?.data)),
-      );
-
-      console.log(
-        'file: file.service.ts:111 ~ FileService ~ saveNodeOsDetails ~ addNodeResponse:',
-        addNodeResponse,
-      );
-
-      if (addNodeResponse?.success) {
-        const authToken = this.jwtService.sign(addNodeResponse?.data);
-        fs.writeFileSync(
-          'src/config/node-config.json',
-          JSON.stringify({ authToken, ...addNodeResponse?.data }),
-          'utf8',
-        );
-      }
     } catch (err) {
       console.error(
         'file: file.service.ts:14 ~ AppService ~ saveNodeOsDetails ~ err:',
-        err?.message,
+        err?.response?.data?.message || err?.message,
       );
       return {
         success: false,
-        message: err.message,
+        message: err?.response?.data?.message || err?.message,
       };
     }
   }
