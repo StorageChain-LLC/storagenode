@@ -20,32 +20,6 @@ services:
     entrypoint: sh -c "/script.sh"
     restart: unless-stopped
 
-   cluster:
-     image: storagechain/cluster:latest
-     entrypoint: sh -c "/follower.sh"
-     hostname: 'cluster-internal.io'
-     platform: linux/amd64
-     restart: unless-stopped
-     environment:
-       CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/node/tcp/5001
-       CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
-       CLUSTER_MONITORINGINTERVAL: "5s"
-       CLUSTER_PEERNAME: $CLUSTER_NAME
-       CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
-       CLUSTER_HOST_NAME: cluster-internal.io
-       CLUSTER_EMAIL: $EMAIL
-       CLUSTER_PASSWORD: $PASSWORD
-       CLUSTER_NODE_ID: $NODE_ID
-     ports:
-       - 9094:9094
-       - 9095:9095
-       - 9096:9096
-     depends_on:
-       - node
-     volumes:
-       - ./storage/cluster:/data/ipfs-cluster
-       - ./follower.sh:/follower.sh
-
    file-server:
     image: storagechain/cluster-file-server:latest
     environment:
