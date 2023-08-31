@@ -1,7 +1,6 @@
-cluster?
+
 # ipfs?
 # ipfs*
-cluster*
 docker-compose-backup.yml
 .vscode
 .env
