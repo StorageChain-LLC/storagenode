@@ -2,7 +2,7 @@
 # ipfs?
 # ipfs*
 repos/*
-logs/*
+# logs/*
 docker-compose-backup.yml
 .vscode
 .env
