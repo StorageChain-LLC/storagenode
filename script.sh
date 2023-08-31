@@ -1,3 +1,7 @@
+# export IPFS_PATH=./repos/ipfs
+mkdir ~/.ipfs
+cp ./swarm.key ~/.ipfs
+
 ./ipfs init --profile server
 ./ipfs bootstrap rm --all
 ./ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
