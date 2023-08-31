@@ -1,20 +1,21 @@
 #!/bin/bash
-export IPFS_PATH=./repos
-./ipfs shutdown
-sleep 2
-# Define an array of service directories and their corresponding start scripts
-services=(
-    "./startup.sh"
-    "./script.sh"
-    "./start_file.sh"
-    # Add more services as needed
-)
-    
-# Loop through the services array and start each service in a new xterm window
-for service in "${services[@]}"; do
-    directory="${service%%:*}"
-    start_script="${service#*:}"
 
-    # Start the service in the background
-    ("./$start_script" &)  # & puts the process in the background
-done
+
+
+./script.sh > ./logs/script.log 2>&1 &
+# tail -f script.log
+sleep 10
+
+cp ./swarm.key ./repos/ipfs/
+sleep 2
+
+./startup.sh > ./logs/cluster.log 2>&1 &
+sleep 1
+tail -f cluster.log
+sleep 5
+
+./start_file.sh > ./logs/fileServer.log 2>&1 &
+# tail -f fileServer.log
+sleep 5
+
+# tail -f ./logs/cluster.log
