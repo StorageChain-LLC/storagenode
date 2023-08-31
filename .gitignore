@@ -9,3 +9,4 @@ docker-compose-backup.yml
 /.DS_Store
 /*build
 follower-cluster.json
+/node_modules
