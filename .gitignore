@@ -1,6 +1,7 @@
 
 # ipfs?
 # ipfs*
+repos/*
 docker-compose-backup.yml
 .vscode
 .env

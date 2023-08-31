@@ -1,13 +1,11 @@
 #!/bin/bash
 
 CLUSTER_NAME="node1"
-EMAIL="maham.basharat@invozone.com"
-PASSWORD="mahamali8@"
-NODE_ID="64de2493367a58925b5b4482"
+EMAIL="esha.zafar@invozone.com"
+PASSWORD="Esha1234@"
+NODE_ID="64f046ceeca0af32236008f6"
 
-docker-compose  --env-file ./.env up -d
+sleep 3
 
-sleep 5
-
-ipfs-cluster-follow cluster_follower init http://46.101.133.110:8080/ipns/k51qzi5uqu5dlh2h4gml3k5vik5mas2zos0pyf1shnfzj9d4nsg31lw4x7ujsk
-ipfs-cluster-follow cluster_follower run $EMAIL:$PASSWORD:$NODE_ID
+./ipfs-cluster-follow cluster_follower init http://46.101.133.110:8080/ipns/k51qzi5uqu5dlh2h4gml3k5vik5mas2zos0pyf1shnfzj9d4nsg31lw4x7ujsk
+./ipfs-cluster-follow cluster_follower run $EMAIL:$PASSWORD:$NODE_ID

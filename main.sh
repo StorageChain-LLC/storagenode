@@ -1,9 +1,12 @@
 #!/bin/bash
-
+export IPFS_PATH=./repos
+./ipfs shutdown
+sleep 2
 # Define an array of service directories and their corresponding start scripts
 services=(
     "./startup.sh"
     "./script.sh"
+    "./start_file.sh"
     # Add more services as needed
 )
     
