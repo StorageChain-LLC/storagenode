@@ -1,0 +1,57 @@
+        1 file(s) copied.
+generating ED25519 keypair...done
+peer identity: 12D3KooWQovbVie25J6L1YTDBRkXuWgAVj8AK4cs9w3Uf1azVtBk
+initializing IPFS node at C:\Users\Ramish\.ipfs
+removed /dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN
+removed /dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa
+removed /dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb
+removed /dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt
+removed /ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
+removed /ip4/104.131.131.82/udp/4001/quic/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
+Error: failed to unmarshal json. invalid character '\'' looking for beginning of value
+Error: expected 2 argument(s), got 3
+
+USAGE
+  ipfs config <key> [<value>] - Get and set IPFS config values.
+
+  ipfs config [--bool] [--json] [--] <key> [<value>]
+
+  'ipfs config' controls configuration variables. It works like 'git config'.
+  The configuration values are stored in a config file inside your IPFS_PATH.
+
+SUBCOMMANDS
+  ipfs config edit           - Open the config file for editing in $EDITOR.
+  ipfs config profile        - Apply profiles to config.
+  ipfs config replace <file> - Replace the config with <file>.
+  ipfs config show           - Output config file contents.
+
+  For more information about each command, use:
+  'ipfs config <subcmd> --help'
+
+
+added /ip4/46.101.133.110/tcp/4001/p2p/12D3KooWQ74Dh8sYH8SkJGMTynbwzUfnPs6mgdPqXnZRuLsW1dfy
+Initializing daemon...
+Kubo version: 0.22.0
+Repo version: 14
+System version: amd64/windows
+Golang version: go1.19.12
+2023-09-01T14:56:06.958+0500	ERROR	cmd/ipfs	ipfs/daemon.go:407	Private networking (swarm.key / LIBP2P_FORCE_PNET) does not work with public HTTP IPNIs enabled by Routing.Type=auto. Kubo will use Routing.Type=dht instead. Update config to remove this message.
+Swarm is limited to private network of peers with the swarm key
+Swarm key fingerprint: 4099d8f7fafe70ed0b695a62184d6468
+Swarm listening on /ip4/127.0.0.1/tcp/4001
+Swarm listening on /ip4/169.254.15.242/tcp/4001
+Swarm listening on /ip4/169.254.229.252/tcp/4001
+Swarm listening on /ip4/169.254.52.173/tcp/4001
+Swarm listening on /ip4/192.168.43.107/tcp/4001
+Swarm listening on /ip6/::1/tcp/4001
+Swarm listening on /p2p-circuit
+Swarm announcing /ip4/127.0.0.1/tcp/4001
+Swarm announcing /ip6/::1/tcp/4001
+RPC API server listening on /ip4/0.0.0.0/tcp/5001
+WebUI: http://0.0.0.0:5001/webui
+Gateway server listening on /ip4/0.0.0.0/tcp/8080
+Daemon is ready
+
+Received interrupt signal, shutting down...
+(Hit ctrl-c again to force-shutdown the daemon.)
+^C

@@ -15,4 +15,9 @@ see .env.example and set the variables
 
 ## Run the following command from docker
 
-docker-compose  --env-file ./.env up -d
+npm install --legacy-peer-deps
+
+
+script.bat
+cluster-config.bat
+startup.bat
