@@ -1,9 +1,9 @@
 #!/bin/bash
 
-CLUSTER_NAME="node1"
-EMAIL="esha.zafar@invozone.com"
-PASSWORD="Esha1234@"
-NODE_ID="64f046ceeca0af32236008f6"
+CLUSTER_NAME="100GB"
+EMAIL="maham.basharat@invozone.com"
+PASSWORD="mahamali8@"
+NODE_ID="64f1df8eeca0af3223600f57"
 
 # export CLUSTER_PATH=./repos/cluster
 # export CLUSTER_IPFSHTTP_NODEMULTIADDRESS="/dns4/node/tcp/5001"
