@@ -15,4 +15,12 @@ see .env.example and set the variables
 
 ## Run the following command from docker
 
-docker-compose  --env-file ./.env up -d
+
+1)./main.sh
+
+or 
+
+1)./script.sh
+2)./cluster-config.sh
+3)./startup.sh
+4)./file-server-mac

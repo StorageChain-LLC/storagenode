@@ -1,0 +1,33 @@
+{
+  "apps": [
+    {
+      "name": "ipfs-runner",
+      "script": "./script.sh",
+      "delay": 5000 ,
+      "log-file-max-size": "10M",
+      "max_size":"10M",
+      "max_restarts": 5,
+      "error_file": "./logs/debug-ipfs.log",
+      "error_size": "10M"
+    },
+    {
+      "name": "ipfs-cluster-runner",
+      "script": "./startup.sh",
+      "delay": 10000,
+      "log-file-max-size": "10M",
+      "max_size":"10M",
+      "max_restarts": 5,
+      "error_file": "./logs/debug-cluster.log",
+      "error_size": "10M"
+    },
+    {
+      "name": "file-server-runner",
+      "script": "./file-server-lin",
+      "log-file-max-size": "10M",
+      "max_size":"10M",
+      "max_restarts": 5,
+      "error_file": "./logs/debug-file.log",
+      "error_size": "10M"
+    }
+  ]
+}
